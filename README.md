@@ -1,5 +1,8 @@
+# 01 Photo
 ![01](https://user-images.githubusercontent.com/76162124/236918851-6c4a21fb-196c-4784-9bfa-12a2c3b82b30.PNG)
 
+# 02 Photo
+![02](https://user-images.githubusercontent.com/76162124/236920081-73f60085-b871-42a2-9d22-d559666162c9.PNG)
 
 # React Interview Task
 
