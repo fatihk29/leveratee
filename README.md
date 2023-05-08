@@ -1,3 +1,6 @@
+![01](https://user-images.githubusercontent.com/76162124/236918851-6c4a21fb-196c-4784-9bfa-12a2c3b82b30.PNG)
+
+
 # React Interview Task
 
 Write a app that use the data api and shows a list of people filtered by the search input with the data below.
