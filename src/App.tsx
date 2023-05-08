@@ -1,17 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 
 // project imports
 import { Country, GetCounriesResponse } from "DataApi/country.interface";
 import { People, GetPeopleResponse } from "DataApi/people.interface";
 import { searchCountries, searchPeople } from "api-usage-example";
+import { calculateYearsOld } from "helper/calculateYearsOld";
+import { getCountryInfo } from "helper/getCountryInfo";
 
-const calculateYearsOld = (val: any) => {
-  const year = new Date(val);
-  const yyyy = year.getFullYear();
-  return new Date().getFullYear() - yyyy;
-};
-
-const App: React.FunctionComponent = () => {
+const App: FC = () => {
   const [value, setValue] = useState<string>("");
   const [timer, setTimer] = useState<any>(null);
 
@@ -25,7 +21,7 @@ const App: React.FunctionComponent = () => {
     clearTimeout(timer);
     const newTimer = setTimeout(() => {
       apiCall();
-    }, 500);
+    }, 200);
     setTimer(newTimer);
   }
 
@@ -42,7 +38,7 @@ const App: React.FunctionComponent = () => {
     apiCall();
   }, []);
 
-  console.log("peopleData?.searchResults :>> ", peopleData?.searchResults);
+  // console.log("peopleData?.searchResults :>> ", countriesData?.searchResults);
 
   return (
     <div className="pageWrapper">
@@ -63,21 +59,21 @@ const App: React.FunctionComponent = () => {
               <th>Age</th>
               <th>Country</th>
             </tr>
-            {peopleData?.searchResults?.map((item: People, i: number) => {
+            {peopleData?.searchResults?.map((person: People, i: number) => {
               return (
-                <React.Fragment key={item.id}>
+                <React.Fragment key={person.id}>
                   <tr>
                     <td>{i + 1}</td>
-                    <td>{item?.first_name}</td>
-                    <td>{item?.last_name}</td>
-                    <td>{calculateYearsOld(item?.date_of_birth)}</td>
+                    <td>{person?.first_name}</td>
+                    <td>{person?.last_name}</td>
+                    <td>{calculateYearsOld(person?.date_of_birth)}</td>
+
                     <td>
                       {
-                        countriesData?.searchResults.find(
-                          (country: Country) => {
-                            return country.alpha2Code == item?.country;
-                          }
-                        )?.name
+                        getCountryInfo(
+                          countriesData?.searchResults,
+                          person?.country
+                        ).name
                       }
                     </td>
                   </tr>
